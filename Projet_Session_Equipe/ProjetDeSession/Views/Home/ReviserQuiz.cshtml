@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProjetDeSession.Models.Quiz>
+
+@{
+    ViewData["Title"] = "ReviserQuiz";
+}
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-5 allign-center">
+            <div class="green">1. Trouver les quizs d'un utilisateur</div>
+            <form asp-action="ReviserQuiz">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label for="UserName" class="control-label"></label>
+                    <input name="UserName" placeholder="Nom Utilisateur" class="form-control" value="@ViewBag.UserName" required />
+                </div>
+                <div class="form-group">
+                    <!-- <label for="Email" class="control-label"></label>-->
+                    <input name="Email" class="form-control" placeholder="Courriel"  value="@ViewBag.Email" required />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Trouver" class="btn btn-primary button-orange" />
+                </div>
+            </form>
+            @if (ViewBag.MessageErreur != null)
+            {
+                <div class="red"> @ViewBag.MessageErreur </div>
+            }
+
+
+            @if (Model != null)
+            {
+                <div class="green">2. Choisir un quiz</div>
+                @using (Html.BeginForm("ReviewQuiz", "Home", FormMethod.Get))
+                {
+                    <select id="quizzes" name="Id" class="m-4" required>
+                        <option value="0">Sélectionner un quiz</option>
+                        @foreach (var quiz in Model)
+                        {
+                            <option value="@quiz.QuizId">Quiz @quiz.QuizId</option>
+                        }
+                    </select>
+                    <br />
+                    <input type="submit" value="Réviser" class="btn btn-primary" />
+                    <input type="button" value="Annuler" class="btn btn-secondary" onclick="location.href='@Url.Action("Index")'" />
+                }
+
+            }
+
+
+        </div>
+    </div>
+
+   
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

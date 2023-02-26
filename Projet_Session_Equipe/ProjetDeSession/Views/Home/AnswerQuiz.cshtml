@@ -1,0 +1,53 @@
+﻿@model ProjetDeSession.Models.Quiz
+
+@{
+    ViewData["Title"] = "AnswerQuiz";
+}
+
+<link rel="stylesheet" href="~/Content Files/bootstrap.css" />
+<link rel="stylesheet" href="~/css/style.css" />
+
+<body class="bgAnswer">
+    <div class="row justify-content-center">
+        <div>
+            @if (Model != null)
+            {
+                <div class="green allign-center">Quiz Numéro @Model.QuizId de @Model.UserName</div>
+                <br />
+                <form asp-action="AnswerQuiz" class="pageAnswer">
+                    @Html.HiddenFor(x => Model.QuizId)
+                    @Html.HiddenFor(x => Model.UserName)
+                    @Html.HiddenFor(x => Model.Email)
+
+                    @foreach (var question in Model.QuestionQuizzes)
+                    {
+                        <b>@Html.DisplayFor(modelItem => question.Question.Text)</b>
+                        <div class="table">
+                            @foreach (var itemOption in question.Question.ItemOptions)
+                            {
+                                <div>
+                                    <input type="radio" name="question-@question.QuestionId" value="@itemOption.OptionId" />
+                                    @itemOption.Text
+                                </div>
+                            }
+                        </div>
+                    }
+                    <div class="allign-center">
+                        <input type="submit" value="Soumettre" class="btn btn-primary" />
+                        <input type="button" value="Annuler" class="btn btn-secondary" onclick="location.href='@Url.Action("Index")'" />
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="bg-white">Vous devez choisir un quiz!</div>
+            }
+
+
+        </div>
+    </div>
+</body>
+
+
+
+

@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Projet de Session";
+}
+
+
+    <div class="text-center">
+        <h4 class="display-4">Projet de Session</h4>
+
+        <p class="green">@ViewBag.Message</p>
+
+        <a class="indexLink" asp-action="GenererQuiz" asp-route-id="">Générer un nouveau quiz</a>
+        <a class="indexLink" asp-action="PasserQuiz" asp-route-id="">Passer un quiz</a>
+        <a class="indexLink" asp-action="ReviserQuiz" asp-route-id="">Réviser un quiz</a>
+
+
+    </div>
+

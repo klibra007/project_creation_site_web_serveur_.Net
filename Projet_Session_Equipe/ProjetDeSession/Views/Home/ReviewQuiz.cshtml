@@ -1,0 +1,63 @@
+﻿@model ProjetDeSession.Models.Quiz
+
+
+
+<link rel="stylesheet" href="~/Content Files/bootstrap.css" />
+<link rel="stylesheet" href="~/css/style.css" />
+
+<body class="review">
+    <div class="row justify-content-center">
+        <div>
+            @if (Model != null)
+            {
+
+                ViewData["Title"] = "ReviewQuiz";
+                int totalReponses = Model.Answers.Count;
+                int bonnesReponses = Model.Answers.Where(a => a.Option.IsRight).ToList().Count;
+
+                <div class="white allign-center">Quiz Numero @Model.QuizId de @Model.UserName</div>
+                <div class="green allign-center">@bonnesReponses / @totalReponses bonnes reponses</div>
+                <br />
+                <form asp-action="SupprimerAnswerQuiz">
+
+                    @Html.HiddenFor(x => Model.QuizId)
+
+                    @foreach (var question in Model.QuestionQuizzes)
+                    {
+                        <b>@Html.DisplayFor(modelItem => question.Question.Text)</b>
+                        <div class="table">
+                            @foreach (var itemOption in question.Question.ItemOptions)
+                            {
+                                bool isChecked = Model.Answers.Where(a => a.OptionId == itemOption.OptionId).ToList().Count > 0;
+                                <div>
+                                    <span class="radio @(itemOption.IsRight ? "radio-green" : "") @(!itemOption.IsRight && isChecked ? "radio-red" : "")">
+                                        <input type="radio"
+                                               value="@itemOption.OptionId"
+                                               name="@question.QuestionId"
+                                               disabled="disabled"
+                                               @(isChecked ? "checked='true'" : "") />
+                                    </span>
+                                    @itemOption.Text
+                                </div>
+                            }
+                        </div>
+                    }
+                    <div class="allign-center">
+                        <input type="submit" value="Supprimer" class="btn btn-primary" />
+                        <input type="button" value="Retour" class="btn btn-secondary" onclick="location.href='@Url.Action("Index")'" />
+                    </div>
+                </form>
+            }
+            else
+            {
+                <div class="bg-white">Vous devez choisir un quiz!</div>
+            }
+
+
+        </div>
+    </div>
+
+</body>
+
+
+

@@ -1,0 +1,97 @@
+﻿.indexLink {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: underline;
+    margin: 60px 0;
+    font-size: 21px;
+    color: #94ba5b;
+}
+
+#typeFacile {
+    color: #94ba5b;
+    font-weight:600;
+}
+
+#typeMoyen {
+    color: #94ba5b;
+    font-weight: 600;
+}
+
+#typeDifficile {
+    color: #94ba5b;
+    font-weight: 600;
+}
+
+.type {
+    display: flex;
+    flex-direction: row
+}
+
+    .type label {
+        width: 500px;
+    }
+
+    .type input {
+        width: 70px;
+        border: 2px solid #94ba5b;
+    }
+
+.genererButton {
+    text-align: center;
+}
+
+    .genererButton input {
+        margin-left: 10px;
+    }
+
+.green {
+    padding-top:1rem;
+    padding-bottom:1rem;
+    color: #94ba5b;
+    font-weight: bold;
+}
+
+.blue {
+    color: #0a83ff;
+    font-weight: bold;
+}
+.red {
+    color: #e56e6e;
+}
+.white {
+    color: #fff;
+    font-weight: bold;
+}
+
+.button-orange {
+    background-color: #ffe004;
+    color: #eb4949;
+    font-weight: bold;
+    border: none;
+    padding: 8px 20px;
+}
+
+.allign-center {
+    text-align: center;
+}
+
+.table {
+    border: 1px solid #94ba5b !important;
+    padding: 12px;
+}
+
+
+.radio {
+    padding-left: 4px;
+    border-radius: 50%;
+    margin: 4px;
+}
+
+.radio-green {
+    background-image: linear-gradient(#49e10b, #d9d9d7);
+}
+
+.radio-red {
+    background-image: linear-gradient(red, #d9d9d7);
+}

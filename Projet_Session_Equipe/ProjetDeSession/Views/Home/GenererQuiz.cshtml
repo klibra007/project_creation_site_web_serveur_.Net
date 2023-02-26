@@ -1,0 +1,50 @@
+﻿@model ProjetDeSession.Models.Quiz
+
+@{
+    ViewData["Title"] = "Generer Nouveau Quiz";
+}
+
+    
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <form asp-action="GenererQuiz">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <!--  <label asp-for="UserName" class="control-label">Nom utilisateur</label>-->
+                    <input asp-for="UserName" placeholder="Nom utilisateur" class="form-control" value="@ViewBag.UserName" required />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <!--<label asp-for="Email" class="control-label">Courriel</label>-->
+                    <input asp-for="Email" placeholder="Courriel" class="form-control" value="@ViewBag.Email" required />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group type">
+                    <label for="nombreFacile" class="control-label">Nombre des questions de type <span id="typeFacile" class="text-success">Facile</span> (Disponible: @ViewBag.questionsFacileCount)</label>
+                    <input id="nombreFacile" name="nombreFacile" class="form-control border-success" type="number" min="0" max="@ViewBag.questionsFacileCount" required />
+                </div>
+                <div class="form-group type">
+                    <label for="nombreMoyen" class="control-label">Nombre des questions de type <span class="text-warning" id="typeMoyen">Moyen</span> (Disponible: @ViewBag.questionsMoyenCount)</label>
+                    <input id="nombreMoyen" name="nombreMoyen" class="form-control border-warning" type="number" min="0" max="@ViewBag.questionsMoyenCount" required />
+                </div>
+                <div class="form-group type">
+                    <label for="nombreDifficile" class="control-label">Nombre des questions de type <span id="typeDifficile" class="text-danger">Difficile</span> (Disponible: @ViewBag.questionsDifficileCount)</label>
+                    <input id="nombreDifficile" name="nombreDifficile" class="form-control border-danger" type="number" min="0" max="@ViewBag.questionsDifficileCount" required />
+                </div>
+                <div class="red">
+                    @Html.ValidationMessage("questions")
+                </div>
+                <div class="form-group">
+                    <div class="genererButton">
+                        <input type="submit" value="Générer" class="btn btn-primary" />
+                        <input type="button" value="Annuler" class="btn btn-secondary" onclick="location.href='@Url.Action("Index")'" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+   
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
